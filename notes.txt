@@ -1,0 +1,3 @@
+https://blog.srnd.org/intro-to-node-js-making-a-telegram-bot-964b8cfe1129
+https://github.com/yagop/node-telegram-bot-api
+https://github.com/ilbonte/node-telegram-bot-starter-kit

@@ -1,0 +1,33 @@
+{
+  "name": "skyseerbot",
+  "version": "0.0.1",
+  "description": "Telegram bot for astronomical sky conditions forecast",
+  "main": "index.js",
+  "scripts": {
+    "test": "/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Need2Revolt/skyseerBot.git"
+  },
+  "keywords": [
+    "astronomy",
+    "sky",
+    "forecast",
+    "seeing",
+    "astronomical",
+    "night",
+    "telegram",
+    "bot",
+    "nodejs"
+  ],
+  "author": "Need2Revolt",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Need2Revolt/skyseerBot/issues"
+  },
+  "homepage": "https://github.com/Need2Revolt/skyseerBot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.28.0"
+  }
+}
