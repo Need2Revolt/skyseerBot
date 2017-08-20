@@ -28,6 +28,9 @@
   },
   "homepage": "https://github.com/Need2Revolt/skyseerBot#readme",
   "dependencies": {
-    "node-telegram-bot-api": "^0.28.0"
+    "node-telegram-bot-api": "^0.28.0",
+    "express"    : "latest",
+    "request"    : "latest",
+    "cheerio"    : "latest"
   }
 }
