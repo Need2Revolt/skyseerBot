@@ -3,6 +3,7 @@ const express = require('express');
 const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
+const cheerioTableparser = require('cheerio-tableparser');
 const emoji = require('node-emoji').emoji;
 
 //set an evironment variable with your bot token.
@@ -16,7 +17,7 @@ skyseerBot.onText(/\/start/, (msg) => {
         "keyboard": [
           [emoji.point_up + "  Predict"],
           [emoji.star2 + "  Astronomical night starting time"],
-          ["  Weather forecasts"],
+          [emoji.last_quarter_moon + "  Moon + planets"],
           ["  All options"]]
         }
     });
@@ -37,16 +38,34 @@ skyseerBot.onText(/Predict/, (msg) => {
           // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
           var $ = cheerio.load(html);
 
-          //Parse what we need to parse
-          var rawTextEnd = $('.tr', '#lm-leg-0').text();
-          var rawTextStart = $('.tr', '#lm-leg-8').text();
+          //Parse what we need to parse:
+          //1 - astro night times
+          var astroNightTimeStart = $('.tr', '#lm-leg-8').text().split("–", 1); //that is not a dash, it's some lame ass character
+          var astroNightTimeEnd = $('.tr', '#lm-leg-0').text().split("–").pop(); //that is not a dash, it's some lame ass character
 
-          // Finally, we'll define the variables we're going to capture
-          var astroNightTimeStart, astroNightTimeEnd;
-          astroNightTimeStart = rawTextStart.split("–", 1); //that is not a dash, it's some lame ass character
-          astroNightTimeEnd = rawTextEnd.split("–").pop(); //that is not a dash, it's some lame ass character
+          //2 - moon condition
+          cheerioTableparser($);
+          data = $('#tb-7dmn').parsetable(true, true, true);
+          var moonTimeStart = data[1][2];
+          var moonTimeEnd = data[3][2];
+          var moonIlluminationPercent = data[data.length - 1][2];
 
-          var message = `Astronomical night *starts at ${astroNightTimeStart}* and ends the day after at *${astroNightTimeEnd}*`;
+          //planets
+
+          //this is preformatted, so indentation had to be sacrificed
+          var message = `
+*Astronomical night*
+  start at *${astroNightTimeStart}*
+  ends at *${astroNightTimeEnd}*
+
+*Moon*
+  rise at *${moonTimeStart}*
+  sets at *${moonTimeEnd}*
+  illumination *${moonIlluminationPercent}*
+
+*Planets*
+
+          `;
           skyseerBot.sendMessage(msg.chat.id, message, {parse_mode: "Markdown"});
       }
   })
@@ -57,7 +76,7 @@ skyseerBot.onText(/Astronomical night starting time/, (msg) => {
   notImplementedYet(msg);
 });
 
-skyseerBot.onText(/Weather forecasts/, (msg) => {
+skyseerBot.onText(/Moon + planets/, (msg) => {
   notImplementedYet(msg);
 });
 
