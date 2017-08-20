@@ -50,8 +50,58 @@ skyseerBot.onText(/Predict/, (msg) => {
           var moonTimeEnd = data[3][2];
           var moonIlluminationPercent = data[data.length - 1][2];
 
-          //planets
+          //3 - planets
+          data = $('table[class=\'tb-wc sep zebra fw\']').parsetable(true, true, true);
+          var mercury = `Mercury:
+  ${emoji.arrow_heading_up} ${data[1][2]}, ${emoji.arrow_heading_down} ${data[2][2]}
+  ${data[4][2]}`;
+          if(data[4][2].includes("Perfect") || data[4][2].includes("ood")) {
+            mercury = "*" + mercury + "*";
+          }
 
+          var venus = `Venus:
+  ${emoji.arrow_heading_up} ${data[1][3]}, ${emoji.arrow_heading_down} ${data[2][3]}
+  ${data[4][3]}`;
+          if(data[4][3].includes("Perfect") || data[4][3].includes("ood")) {
+            venus = "*" + venus + "*";
+          }
+
+          var mars = `Mars:
+  ${emoji.arrow_heading_up} ${data[1][4]}, ${emoji.arrow_heading_down} ${data[2][4]}
+  ${data[4][4]}`;
+          if(data[4][4].includes("Perfect") || data[4][4].includes("ood")) {
+            mars = "*" + mars + "*";
+          }
+
+          var jupiter = `Jupiter:
+  ${emoji.arrow_heading_up} ${data[1][5]}, ${emoji.arrow_heading_down} ${data[2][5]}
+  ${data[4][5]}`;
+        if(data[4][5].includes("Perfect") || data[4][5].includes("ood")) {
+          jupiter = "*" + jupiter + "*";
+        }
+
+          var saturn = `Saturn:
+  ${emoji.arrow_heading_up} ${data[1][6]}, ${emoji.arrow_heading_down} ${data[2][6]}
+  ${data[4][6]}`;
+        if(data[4][6].includes("Perfect") || data[4][6].includes("ood")) {
+          saturn = "*" + saturn + "*";
+        }
+
+          var uranus = `Uranus:
+  ${emoji.arrow_heading_up} ${data[1][7]}, ${emoji.arrow_heading_down} ${data[2][7]}
+  ${data[4][7]}`;
+          if(data[4][7].includes("Perfect") || data[4][7].includes("ood")) {
+            uranus = "*" + uranus + "*";
+          }
+
+          var neptune = `Neptune:
+  ${emoji.arrow_heading_up} ${data[1][8]}, ${emoji.arrow_heading_down} ${data[2][8]}
+  ${data[4][8]}`;
+          if(data[4][8].includes("Perfect") || data[4][8].includes("ood")) {
+            neptune = "*" + neptune + "*";
+          }
+
+          //Finally assemble everything
           //this is preformatted, so indentation had to be sacrificed
           var message = `
 *Astronomical night*
@@ -64,6 +114,13 @@ skyseerBot.onText(/Predict/, (msg) => {
   illumination *${moonIlluminationPercent}*
 
 *Planets*
+  ${mercury}
+  ${venus}
+  ${mars}
+  ${jupiter}
+  ${saturn}
+  ${uranus}
+  ${neptune}
 
           `;
           skyseerBot.sendMessage(msg.chat.id, message, {parse_mode: "Markdown"});
