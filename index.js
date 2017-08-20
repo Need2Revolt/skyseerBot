@@ -3,7 +3,7 @@ const express = require('express');
 const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
-const app     = express();
+const emoji = require('node-emoji').emoji;
 
 //set an evironment variable with your bot token.
 // i.e. for Linux: export SKYSEER_TOKEN='YOUR_BOT_TOKEN'
@@ -13,7 +13,11 @@ const skyseerBot = new TelegramBot(process.env.SKYSEER_TOKEN, {polling: true});
 skyseerBot.onText(/\/start/, (msg) => {
   skyseerBot.sendMessage(msg.chat.id, "Insert witty welcome message here", {
     "reply_markup": {
-        "keyboard": [["Predict"],["Astronomical night starting time"], ["Weather forecasts"], ["All options"]]
+        "keyboard": [
+          [emoji.point_up + "  Predict"],
+          [emoji.star2 + "  Astronomical night starting time"],
+          ["  Weather forecasts"],
+          ["  All options"]]
         }
     });
 });
